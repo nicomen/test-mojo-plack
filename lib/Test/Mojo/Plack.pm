@@ -96,16 +96,16 @@ sub _request_ok {
     }
     $env->{HTTP_HOST} ||= 'localhost';
 
-  my $ret = $self->{psgi_app}->($env);
-  my $res = Mojo::Message::Response->new();
+    my $ret = $self->{psgi_app}->($env);
+    my $res = Mojo::Message::Response->new();
 
-  $ret->(sub {
-    my ($code, $headers, $body) = @{+shift};
-    my $header_hash;
-    my $it = List::MoreUtils::natatime 2, @{$headers};
-    while (my($k, $v) = $it->()) {
-        $res->headers->append($k, $v);
-    }
+    $ret->(sub {
+        my ($code, $headers, $body) = @{+shift};
+        my $header_hash;
+        my $it = List::MoreUtils::natatime 2, @{$headers};
+        while (my($k, $v) = $it->()) {
+            $res->headers->append($k, $v);
+        }
     $res->code($code);
     $res->body(join '', map { decode 'UTF-8', $_ } @{$body});
   });
@@ -127,11 +127,11 @@ Test::Mojo::Plack - Test Plack-compatible applications with Test:Mojo
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 SYNOPSIS
 
@@ -151,6 +151,7 @@ our $VERSION = '0.05';
 =head1 SUBROUTINES/METHODS
 
 =head2 new
+
 =head2 new($app)
 
 Returns a L<Test::Mojo::Plack> object that is a subclass of L<Test::Mojo>

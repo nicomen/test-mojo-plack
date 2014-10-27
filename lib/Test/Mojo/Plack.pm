@@ -168,6 +168,10 @@ You can find documentation for this module with the perldoc command.
 
     perldoc Test::Mojo::Plack
 
+=head1 REPOSITORY
+
+L<https://github.com/nicomen/test-mojo-plack>
+
 =head1 ACKNOWLEDGEMENTS
 
 Heavily inspired by L<Plack::Test> and L<Catalyst::Test> and of course L<Test::Mojo>

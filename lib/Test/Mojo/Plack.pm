@@ -123,7 +123,7 @@ sub _request_ok {
 
 =head1 NAME
 
-Test::Mojo::Plack - The great new Test::Mojo::Plack!
+Test::Mojo::Plack - Test Plack-compatible applications with Test:Mojo
 
 =head1 VERSION
 
@@ -131,7 +131,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 

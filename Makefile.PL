@@ -1,0 +1,20 @@
+use 5.006;
+use strict;
+use warnings;
+use ExtUtils::MakeMaker;
+
+WriteMakefile(
+    NAME                => 'Test::Mojo::Plack',
+    AUTHOR              => q{Nicolas Mendoza <mendoza@pvv.ntnu.no>},
+    VERSION_FROM        => 'lib/Test/Mojo/Plack.pm',
+    ABSTRACT_FROM       => 'lib/Test/Mojo/Plack.pm',
+    ($ExtUtils::MakeMaker::VERSION >= 6.3002
+      ? ('LICENSE'=> 'perl')
+      : ()),
+    PL_FILES            => {},
+    PREREQ_PM => {
+        'Test::More' => 0,
+    },
+    dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean               => { FILES => 'Test-Mojo-Plack-*' },
+);

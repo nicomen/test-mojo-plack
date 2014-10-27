@@ -1,5 +1,8 @@
 package Test::Mojo::Plack;
 
+use strict;
+use warnings;
+
 use Mojo::Base 'Test::Mojo';
 use Mojo::Headers;
 use Mojo::Transaction::HTTP;
@@ -118,5 +121,70 @@ sub _request_ok {
   return $self->_test('ok', $ok, $desc);
 }
 
-1;
+=head1 NAME
+
+Test::Mojo::Plack - The great new Test::Mojo::Plack!
+
+=head1 VERSION
+
+Version 0.01
+
+=cut
+
+our $VERSION = '0.01';
+
+=head1 SYNOPSIS
+
+Quick summary of what the module does.
+
+Perhaps a little code snippet.
+
+    use Test::Mojo::Plack;
+
+    my $foo = Test::Mojo::Plack->new('My::Catalyst::App');
+    my $foo = Test::Mojo::Plack->new('My::Dancer::App');
+
+    $foo->get_ok("/")->status_is(200)->content_type_is('text/html')->text_is('#footer a.author', 'mendoza@pvv.ntnu.no');
+
+=head1 SUBROUTINES/METHODS
+
+=head2 new
+
+Returns a L<Test::Mojo::Plack> object that is a subclass of L<Test::Mojo>
+
+=head1 AUTHOR
+
+Nicolas Mendoza, C<< <mendoza at pvv.ntnu.no> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-test-mojo-plack at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Mojo-Plack>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc Test::Mojo::Plack
+
+=head1 ACKNOWLEDGEMENTS
+
+Heavily inspired by L<Plack::Test> and L<Catalyst::Test> and of course L<Test::Mojo>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2014 Nicolas Mendoza.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+
+=cut
+
+1; # End of Test::Mojo::Plack
+
 

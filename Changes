@@ -1,5 +1,8 @@
 Revision history for Test-Mojo-Plack
 
+0.05    2014-10-27 22:15
+        Add initial Dancer app test
+
 0.04    2014-10-27 21:50
         Updated documentation
 

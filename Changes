@@ -1,5 +1,11 @@
 Revision history for Test-Mojo-Plack
 
+0.03    2014-10-27 21:30
+        Fix dependencies and add missing tests
+
+0.02    2014-10-27 21:25
+        Fix dependencies and add missing tests
+
 0.01    2014-10-27 18:30
         First version, released on an unsuspecting world.
 

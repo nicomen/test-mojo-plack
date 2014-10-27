@@ -127,40 +127,49 @@ Test::Mojo::Plack - Test Plack-compatible applications with Test:Mojo
 
 =head1 VERSION
 
-Version 0.01
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
     use Test::Mojo::Plack;
+    use Test::More;
 
     my $foo = Test::Mojo::Plack->new('My::Catalyst::App');
     my $foo = Test::Mojo::Plack->new('My::Dancer::App');
 
-    $foo->get_ok("/")->status_is(200)->content_type_is('text/html')->text_is('#footer a.author', 'mendoza@pvv.ntnu.no');
+    $foo->get_ok("/")
+         ->status_is(200)
+         ->content_type_is('text/html')
+         ->text_is('#footer a.author', 'mendoza@pvv.ntnu.no');
+
+    done_testing;
 
 =head1 SUBROUTINES/METHODS
 
 =head2 new
+=head2 new($app)
 
 Returns a L<Test::Mojo::Plack> object that is a subclass of L<Test::Mojo>
+
+If $app is provided, it tries to set app a PSGI application by guessing the framework of it.
+
+=head1 METHODS
+
+L<Test::Mojo::Plack> inherits all methods from L<Test::Mojo> and overrides the following:
+
+=head2 _request_ok
+
+Hijacks the setup and sending of a request to send it to a pre-defined PSGI application. 
 
 =head1 AUTHOR
 
 Nicolas Mendoza, C<< <mendoza at pvv.ntnu.no> >>
 
 =head1 BUGS
-
-Please report any bugs or feature requests to C<bug-test-mojo-plack at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Mojo-Plack>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 

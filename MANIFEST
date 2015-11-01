@@ -6,7 +6,6 @@ Makefile.PL
 MANIFEST			This list of files
 README
 README.md
-t/*.t
 t/00-load.t
 t/01-main.t
 t/02-catalyst.t

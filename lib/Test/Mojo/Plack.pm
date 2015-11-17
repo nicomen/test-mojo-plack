@@ -10,6 +10,7 @@ use Mojo::URL;
 use Mojo::Util qw(encode decode url_unescape);
 
 use Class::Load qw(load_class is_class_loaded);
+use IO::String;
 use List::MoreUtils;
 use Scalar::Util  qw(blessed);
 
@@ -22,7 +23,7 @@ sub new {
 
     $ENV{PLACK_ENV} = 1;
 
-    if (ref $app_class eq 'CODE') { 
+    if (ref $app_class eq 'CODE') {
         $t->{psgi_app} = sub { my $res = $app_class->(shift); sub { shift->($res); } };
     } else {
         load_class($app_class) unless is_class_loaded($app_class);
@@ -65,16 +66,17 @@ sub _request_ok {
         REQUEST_METHOD    => $tx->req->method,
         'psgi.version'      => [ 1, 1 ],
         'psgi.url_scheme'   => $url->scheme && $url->scheme eq 'https' ? 'https' : 'http',
-        'psgi.input'        => $tx->req->body,
+        'psgi.input'        => IO::String->new($tx->req->body . "\r\n"),
         'psgi.errors'       => *STDERR,
         'psgi.multithread'  => 0,
         'psgi.multiprocess' => 0,
         'psgi.run_once'     => 1,
         'psgi.streaming'    => 1,
         'psgi.nonblocking'  => 0,
+        'HTTP_CONTENT_LENGTH' => length($tx->req->body),
     };
 
-    for my $field ( $tx->req->headers->names ) {
+    for my $field ( @{ $tx->req->headers->names || [] }) {
         my $key = uc("HTTP_$field");
         $key =~ tr/-/_/;
         $key =~ s/^HTTP_// if $field =~ /^Content-(Length|Type)$/;
@@ -106,19 +108,35 @@ sub _request_ok {
         while (my($k, $v) = $it->()) {
             $res->headers->append($k, $v);
         }
-    $res->code($code);
-    $res->body(join '', map { decode 'UTF-8', $_ } @{$body});
-  });
+        $res->code($code);
 
-  $self->tx(Mojo::Transaction::HTTP->new);
-  $self->tx->req->env($env);
-  $self->tx->res($res);
+        my $body_str = '';
+        if (defined $body && blessed($body)) {
+            if ($body->can('getline')) {
+                while (my $line = $body->getline) {
+                    $body_str .= ($line || '');
+                }
+            }
+        } elsif(ref $body) {
+            if (ref($body) eq 'ARRAY') {
+                $body_str = join '', @{$body};
+            }
+        };
 
-  my $err = $self->tx->error;
-  Test::More::diag $err->{message}
-    if !(my $ok = !$err->{message} || $err->{code}) && $err;
-  my $desc = encode 'UTF-8', "@{[uc $tx->req->method]} $url";
-  return $self->_test('ok', $ok, $desc);
+        $body_str //= $body;
+
+        $res->body(decode 'UTF-8', $body_str);
+    });
+
+    $self->tx(Mojo::Transaction::HTTP->new);
+    $self->tx->req->env($env);
+    $self->tx->res($res);
+
+    my $err = $self->tx->error;
+    Test::More::diag $err->{message}
+      if !(my $ok = !$err->{message} || $err->{code}) && $err;
+    my $desc = encode 'UTF-8', "@{[uc $tx->req->method]} $url";
+    return $self->_test('ok', $ok, $desc);
 }
 
 =head1 NAME

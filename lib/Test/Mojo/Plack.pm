@@ -196,6 +196,20 @@ You can find documentation for this module with the perldoc command.
 
     perldoc Test::Mojo::Plack
 
+=head1 SEE ALSO
+
+=over
+
+=item L<Test::Mojo>
+
+=item L<Catalyst::Test>
+
+=item L<Plack::Test>
+
+=item L<Test::Mojo::Role::PSGI> - Newer alternative approach
+
+=back
+
 =head1 REPOSITORY
 
 L<https://github.com/nicomen/test-mojo-plack>

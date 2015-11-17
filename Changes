@@ -1,5 +1,8 @@
 Revision history for Test-Mojo-Plack
 
+0.09    2015-11-07 13:07
+        Fix problems with Catalyst PSGI apps
+
 0.08    2015-11-01 15:10
         Add META.yml
 
@@ -22,4 +25,4 @@ Revision history for Test-Mojo-Plack
         Fix dependencies and add missing tests
 
 0.01    2014-10-27 18:30
-        First version, released on an unsuspecting world.
+        First version, released  on an unsuspecting world.

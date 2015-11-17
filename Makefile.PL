@@ -13,6 +13,7 @@ WriteMakefile(
       : ()),
     PL_FILES            => {},
     PREREQ_PM => {
+        'IO::String' => 0,
         'Test::More' => 0,
         'Mojolicious' => 5.0,
         'Class::Load' => 0,

@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+use strict;
+use warnings;
+
 use Test::Mojo::Plack;
 use Test::More skip_all => 'Need to implement fake Dancer application';
 

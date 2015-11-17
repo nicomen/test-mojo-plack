@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 
+use strict;
+use warnings;
+
 use Test::Mojo::Plack;
 use Test::More;
-
-my $t = Test::Mojo::Plack->new();
 
 my $t = Test::Mojo::Plack->new();
 

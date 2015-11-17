@@ -1,5 +1,11 @@
 Revision history for Test-Mojo-Plack
 
+0.08    2015-11-01 15:10
+        Add META.yml
+
+0.07    2014-11-04 10:41
+        Test against local server instead of Google
+
 0.06    2014-10-27 22:40
         Fix broken documentation
 

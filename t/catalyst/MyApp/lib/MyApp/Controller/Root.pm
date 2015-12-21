@@ -2,6 +2,8 @@ package MyApp::Controller::Root;
 use Moose;
 use namespace::autoclean;
 
+use Encode;
+
 BEGIN { extends 'Catalyst::Controller' }
 
 __PACKAGE__->config(namespace => '');
@@ -22,6 +24,13 @@ sub default :Path {
     my ( $self, $c ) = @_;
     $c->response->body( 'Page not found' );
     $c->response->status(404);
+}
+
+sub utf8 :Path :Args(1) {
+    my ( $self, $c ) = @_;
+
+    $c->stash(foo => decode_utf8("\x{e2}\x{80}\x{93}"));
+    $c->forward('View::JSON');
 }
 
 sub end : ActionClass('RenderView') {}

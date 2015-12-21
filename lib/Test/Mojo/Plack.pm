@@ -125,7 +125,7 @@ sub _request_ok {
 
         $body_str //= $body;
 
-        $res->body(decode 'UTF-8', $body_str);
+        $res->body($body_str);
     });
 
     $self->tx(Mojo::Transaction::HTTP->new);

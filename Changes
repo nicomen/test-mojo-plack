@@ -1,5 +1,8 @@
 Revision history for Test-Mojo-Plack
 
+0.10    2015-11-07 13:07
+        Fix problems with encoding
+
 0.09    2015-11-07 13:07
         Fix problems with Catalyst PSGI apps
 

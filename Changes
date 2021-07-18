@@ -1,5 +1,8 @@
 Revision history for Test-Mojo-Plack
 
+0.12    2021-07-18 15:56
+        Support when body is a glob ref, happens at least when send_file is used in Dancer 1
+
 0.11    2020-04-19 20:07
         Fix problem with change in Mojolicious 8.36 (Test::Mojo::_test => Test::Mojo::test)
 

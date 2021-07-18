@@ -121,6 +121,7 @@ sub _request_ok {
             if ($type eq 'ARRAY') {
                 $body_str = join '', @{$body};
             } elsif ($type eq 'GLOB') {
+                local $/;
                 $body_str = <$body>;
             }
         };

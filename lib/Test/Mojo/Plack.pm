@@ -117,9 +117,11 @@ sub _request_ok {
                     $body_str .= ($line || '');
                 }
             }
-        } elsif(ref $body) {
-            if (ref($body) eq 'ARRAY') {
+        } elsif(my $type = ref $body) {
+            if ($type eq 'ARRAY') {
                 $body_str = join '', @{$body};
+            } elsif ($type eq 'GLOB') {
+                $body_str = <$body>;
             }
         };
 

@@ -1,5 +1,8 @@
 Revision history for Test-Mojo-Plack
 
+0.13    2021-07-18 16:20
+        Slurp entire body in glob ref mode
+
 0.12    2021-07-18 15:56
         Support when body is a glob ref, happens at least when send_file is used in Dancer 1
 
